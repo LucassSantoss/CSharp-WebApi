@@ -31,3 +31,7 @@
 /Users/lucas/Programacao/Estudo/WebApi/WebApi/obj/Debug/net9.0/WebApi.pdb
 /Users/lucas/Programacao/Estudo/WebApi/WebApi/obj/Debug/net9.0/WebApi.genruntimeconfig.cache
 /Users/lucas/Programacao/Estudo/WebApi/WebApi/obj/Debug/net9.0/ref/WebApi.dll
+/Users/lucas/Programacao/Estudo/WebApi/WebApi/obj/Debug/net9.0/WebApi.sourcelink.json
+/Users/lucas/Programacao/Estudo/WebApi/WebApi/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/lucas/Programacao/Estudo/WebApi/WebApi/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/lucas/Programacao/Estudo/WebApi/WebApi/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
