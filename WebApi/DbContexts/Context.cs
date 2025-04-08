@@ -9,6 +9,6 @@ public class Context : DbContext
     public DbSet<Diretor> Diretores { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite("../../../EFCoreConsole.db");
+        => options.UseSqlite("Data Source=EFCoreConsole.db");
 }
 

@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using WebApi.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+using var db = new Context();
+db.Database.EnsureCreated();
 
 // Ativa o suporte para Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
