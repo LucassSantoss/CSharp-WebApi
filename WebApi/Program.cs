@@ -10,11 +10,6 @@ builder.Services.AddDbContext<Context>(
     options => options.UseSqlite(builder.Configuration["ConnectionStrings:EFCoreConsole"])
 );
 
-// using (var context = new Context())
-// {
-//     context.Database.EnsureCreated();
-// }
-
 // Ativa o suporte para Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,6 +29,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapGet("/createDB", (Context context) =>
+{
+    context.Database.EnsureCreated();
+});
 
 app.MapGet("/diretores", (Context context) =>
 {
