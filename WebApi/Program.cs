@@ -31,10 +31,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/createDB", (Context context) =>
-{
-    context.Database.EnsureCreated();
-});
+// app.MapGet("/createDB", (Context context) =>
+// {
+//     context.Database.EnsureCreated();
+// });
 
 app.MapGet("/diretores", (Context context) =>
 {
