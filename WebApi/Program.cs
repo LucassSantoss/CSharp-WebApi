@@ -53,13 +53,41 @@ app.MapGet("/diretores/{id}", (Context context, int id) =>
 .WithOpenApi();
 
 app.MapGet("/filmes/{id}", (Context context, int id) =>
-    {
-        return context.Filmes
-            .Where(filme => filme.Id == id)
-            .Include(filme => filme.Diretor)
-            .ToList();
-    })
-    .WithOpenApi();
+{
+    return context.Filmes
+        .Where(filme => filme.Id == id)
+        .Include(filme => filme.Diretor)
+        .ToList();
+})
+.WithOpenApi();
+
+app.MapGet("/filmes/byName/{titulo}", (
+    Context context,
+    string titulo) =>
+{
+    // return context.Filmes
+    //     .Where(filme => filme.Titulo.Contains(titulo))
+    //     .Include(filme => filme.Diretor)
+    //     .ToList();
+
+    return context.Filmes
+        .Where(filme =>
+                    EF.Functions.Like(filme.Titulo, $"%{titulo}%")
+        )
+        .Include(filme => filme.Diretor)
+        .ToList();
+})
+.WithOpenApi();
+
+app.MapGet("/filmes", (Context context) =>
+{
+    return context.Filmes
+        .Include(filme => filme.Diretor)
+        .OrderByDescending(filme => filme.Ano)
+        .ThenByDescending(filme => filme.Titulo)
+        .ToList();
+})
+.WithOpenApi();
 
 app.MapPost("/diretores", (Context context, Diretor diretor) =>
 {
@@ -71,7 +99,7 @@ app.MapPost("/diretores", (Context context, Diretor diretor) =>
 app.MapPut("/diretores/{diretorId}", (Context context, int diretorId, Diretor diretorNovo) =>
 {
     var diretor = context.Diretores.Find(diretorId);
-    
+
     if (diretor != null)
     {
         diretor.Name = diretorNovo.Name;
