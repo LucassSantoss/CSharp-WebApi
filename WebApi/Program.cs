@@ -43,6 +43,24 @@ app.MapGet("/diretores", (Context context) =>
 })
 .WithOpenApi();
 
+app.MapGet("/diretores/{id}", (Context context, int id) =>
+{
+    return context.Diretores
+        .Where(diretor => diretor.Id == id)
+        .Include(diretor => diretor.Filmes)
+        .ToList();
+})
+.WithOpenApi();
+
+app.MapGet("/filmes/{id}", (Context context, int id) =>
+    {
+        return context.Filmes
+            .Where(filme => filme.Id == id)
+            .Include(filme => filme.Diretor)
+            .ToList();
+    })
+    .WithOpenApi();
+
 app.MapPost("/diretores", (Context context, Diretor diretor) =>
 {
     context.Diretores.Add(diretor);
