@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace WebApi.Entities;
+namespace WebApi.Domain.Entities;
 
 public class Diretor
 {

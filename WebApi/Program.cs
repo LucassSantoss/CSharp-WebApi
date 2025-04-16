@@ -2,9 +2,9 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DbContexts;
-using WebApi.EndpointHandlers;
-using WebApi.Entities;
-using WebApi.Models;
+using WebApi.EndpointsExtensions;
+using WebApi.Repo;
+using WebApi.Repo.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>(
     options => options.UseSqlite(builder.Configuration["ConnectionStrings:EFCoreConsole"])
 );
+
+builder.Services.AddScoped<IDiretorRepository, DiretorRepository>();
 
 builder.Services.Configure<JsonOptions>(options =>
 {
@@ -32,31 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.MapGet("/createDB", (Context context) =>
-// {
-//     context.Database.EnsureCreated();
-// });
+app.DiretoresEnpoints();
 
-app.MapGet("/diretores", DiretoresHandler.GetDiretores).WithOpenApi();
-
-app.MapGet("/diretores/byName/{name}", DiretoresHandler.GetDiretorByName).WithOpenApi();
-
-app.MapGet("/diretores/{id}", DiretoresHandler.GetDiretorById).WithOpenApi();
-
-app.MapPost("/diretores", DiretoresHandler.AddDiretor).WithOpenApi();
-
-app.MapPut("/diretores/{diretorId}", DiretoresHandler.UpdateDiretor).WithOpenApi();
-
-app.MapDelete("/diretores/{diretorId}", DiretoresHandler.DeleteDiretor).WithOpenApi();
-
-app.MapGet("/filmes", FilmesHandler.GetFilmes).WithOpenApi();
-
-app.MapGet("/filmes/{id}", FilmesHandler.GetFilmeById).WithOpenApi();
-
-app.MapGet("/filmes/byName/{titulo}", FilmesHandler.GetFilmeByName).WithOpenApi();
-
-app.MapPatch("/filmes", FilmesHandler.UpdateFilme).WithOpenApi();
-
-app.MapDelete("/filmes/{filmeId}", FilmesHandler.DeleteFilme).WithOpenApi();
+app.FilmesEndpoints();
 
 app.Run();

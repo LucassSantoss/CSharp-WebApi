@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DbContexts;
-using WebApi.Entities;
+using WebApi.Domain.Entities;
 using WebApi.Models;
 
 namespace WebApi.EndpointHandlers;
