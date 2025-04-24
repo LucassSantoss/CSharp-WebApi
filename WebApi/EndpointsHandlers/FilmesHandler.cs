@@ -11,7 +11,7 @@ public static class FilmesHandler
     public static IResult GetFilmes(Context context)
     {
         return Results.Ok(context.Filmes
-            .Include(filme => filme.Diretor)
+            .Include(filme => filme.Diretores)
             .OrderByDescending(filme => filme.Ano)
             .ThenByDescending(filme => filme.Titulo)
             .ToList());
@@ -21,7 +21,7 @@ public static class FilmesHandler
     {
         return Results.Ok(context.Filmes
             .Where(filme => filme.Id == id)
-            .Include(filme => filme.Diretor)
+            .Include(filme => filme.Diretores)
             .ToList());
     }
 
@@ -31,7 +31,7 @@ public static class FilmesHandler
         return Results.Ok(context.Filmes
             .Where(filme => EF.Functions.Like(filme.Titulo, $"%{titulo}%"))
             //.Where(filme => filme.Titulo.ToLower().Contains(titulo.ToLower()))
-            .Include(filme => filme.Diretor)
+            .Include(filme => filme.Diretores)
             .ToList());
     }
 
