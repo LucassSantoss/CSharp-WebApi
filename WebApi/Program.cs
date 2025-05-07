@@ -27,6 +27,13 @@ builder.Services.Configure<JsonOptions>(options =>
 
 var app = builder.Build();
 
+// Create the database if it doesn't exist
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<Context>();
+    db.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
